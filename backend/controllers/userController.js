@@ -26,3 +26,7 @@ export const registerUser=asyncHandler(async(req,res)=>{
         res.status(201).json({_id:user._id,name:user.name,email:user.email,image:user.image,token:jwt.sign({userId:user._id},process.env.JWT_SECRET,{expiresIn:"30d"})})
     }
 })
+
+export const getUserProfile=asyncHandler(async(req,res)=>{
+    res.json(req.user)
+})

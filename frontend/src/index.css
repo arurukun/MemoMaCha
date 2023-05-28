@@ -2,4 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .container{@apply md:10/12} */
+.container{@apply w-10/12 mx-auto py-4}
+
+.tytle{@apply text-3xl font-bold self-center text-orange-900}
+
+.sm_tytle{@apply text-xl font-bold }
+
+.btn{@apply md:block md:mx-auto sm:w-auto w-full md:w-5/12 rounded-md bg-orange-800 hover:bg-orange-700 text-white py-2 my-4 }
+
+.input{@apply border-2 rounded-lg p-1.5  border-orange-800 bg-lime-100 focus:outline-none w-full}
+
+.loading{@apply text-orange-800}
+
+.error{@apply text-white bg-red-600 py-2 m-2 text-center}
+
+.list{@apply list-disc ml-4}
+
+

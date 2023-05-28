@@ -3,8 +3,10 @@ import dotenv from "dotenv"
 import colors from "colors"
 import { connected } from "./mongoose.js"
 import userRouter from "./routes/userRoute.js"
+import cors from "cors"
 
 const app=express()
+app.use(cors())
 dotenv.config()
 app.use(express.json())
 connected()
