@@ -2,11 +2,8 @@ import { Schema,model } from "mongoose";
 
 const memoSchema=Schema({
     owner:{type:Schema.Types.ObjectId,required:true,ref:"User"},
-    category:{type:String,required:true},
-    memoItem:[{
-        tytle:{type:String,required:true,default:"None"},
-        memo:{type:String,required:true}
-    }],
+    tytle:{type:String,required:true,default:"None"},
+    content:{type:String,required:true},
     readUser:[{type:Schema.Types.ObjectId,required:true,ref:"User"}],
     writeUser:[{type:Schema.Types.ObjectId,required:true,ref:"User"}],
 

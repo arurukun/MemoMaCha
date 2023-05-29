@@ -3,6 +3,7 @@ import { Header } from "./component/Header";
 import { HomeScreen } from "./screen/HomeScreen";
 import { UserLoginScreen } from "./screen/UserLoginScreen";
 import { UserRegisterScreen } from "./screen/UserRegisterScreen";
+import { MemoScreen } from "./screen/MemoScreen";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Header/>
         <Route path="/login" component={UserLoginScreen}/>
         <Route path="/register" component={UserRegisterScreen}/>
+        <Route path="/memo" component={MemoScreen}/>
         <Route path="/" component={HomeScreen} exact/>
       </main>
     </BrowserRouter>

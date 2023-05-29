@@ -1,6 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
-export const HomeScreen = () => {
+export const HomeScreen = ({history}) => {
+  const {userInfo}=useSelector((s)=>s.userLogin)
+  const [memoList, setMemoList] = useState([])
+  const [toDoList, setToDoList] = useState([])
+
+
+  useEffect(() => {
+    // if(userInfo&&userInfo.user._id==)
+  },[userInfo])
+
+  const memoStartHandler=()=>{
+    history.push("/memo")
+  }
+
   return (
     <div>
       <div className='container'>
@@ -21,7 +35,7 @@ export const HomeScreen = () => {
                 <li>Freely descrive : Can be customaized</li>
                 <li>Categorization : Searchable for tytle</li>
               </ul>
-              <button className='btn'>Start</button>
+              <button onClick={memoStartHandler} className='btn'>Start</button>
             </div>
             <div>
               <h1 className='sm_tytle'>--To Do List--</h1>
