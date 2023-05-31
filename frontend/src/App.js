@@ -10,8 +10,8 @@ function App() {
   return (
 
     <BrowserRouter>
-      <main className="bg-gradient-to-tr from-teal-100 to-lime-300 min-h-screen min-w-screen">
       <Header/>
+      <main className="bg-gradient-to-tr from-teal-100 to-lime-300 min-h-screen min-w-screen">
         <Route path="/login" component={UserLoginScreen}/>
         <Route path="/register" component={UserRegisterScreen}/>
         <Route path="/memo" component={MemoScreen}/>

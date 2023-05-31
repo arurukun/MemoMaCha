@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import {Link} from "react-router-dom"
 
 export const HomeScreen = ({history}) => {
   const {userInfo}=useSelector((s)=>s.userLogin)
-  const [memoList, setMemoList] = useState([])
+  const [memoList, setMemoList] = useState([{tytle:"my hobby lately",content:"traveling around world"},{tytle:"my hobby lately",content:"traveling around world"}])
   const [toDoList, setToDoList] = useState([])
 
 
@@ -31,7 +32,7 @@ export const HomeScreen = ({history}) => {
             <p>Expand your idea and furthermore your life</p>
         </div>
 
-        <div className='md:flex justify-end items-center my-4'>
+        <div className='md:flex md:justify-end md:items-center my-4'>
           <div className='border border-orange-800 p-4 divide-y divide-yellow-950'>  
             <div>
               <h1 className='sm_tytle'>--Memo Box--</h1>
@@ -51,8 +52,15 @@ export const HomeScreen = ({history}) => {
           </div>
         </div>
 
-        <div className='grid sm:grid-cols-2 md:grid-cols-4 gap-2 border border-orange-800 w-6/12'>
-          
+        <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-2 border-2 border-orange-800 md:w-6/12 p-4 md:-mt-40 shadow-xl'>
+          {memoList&&memoList.map((memo)=>{return(
+            <Link to="">
+              <div className='border border-orange-800 text-sm p-2 rounded-md shadow-md'>
+                <div className='font-bold mx-2'>{memo.tytle.length>10 ? memo.tytle.substring(0,10)+"..." : memo.tytle}</div>
+                <div>{memo.content.length>10 ? memo.content.substring(0,10)+"..." : memo.content}</div>
+              </div>
+            </Link>
+          )})}
         </div>
 
       </div>

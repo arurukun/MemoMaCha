@@ -15,3 +15,12 @@ export const createMemo=asyncHandler(async(req,res)=>{
     }
 })
 
+export const getListMemo=asyncHandler(async(req,res)=>{
+    const userPopulate=await req.user.populate('memoList', "_id tytle content updatedAt")
+    const memoList = userPopulate.memoList
+    if(memoList){
+        res.json(memoList)
+    }else{
+        res.status(404).send("Mmeo is empty")
+    }
+})

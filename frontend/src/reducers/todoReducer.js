@@ -10,3 +10,16 @@ export const createTodoR=(state={},action)=>{
             return state
     }
 }
+
+export const listTodoR=(state=[],action)=>{
+    switch(action.type){
+        case "LIST_TODO_REQ":
+            return {loading:true,data:[]}
+        case "LIST_TODO_SUC":
+            return {loading:false,data:action.payload}
+        case "LIST_TODO_FAIL":
+            return {loading:false,error:action.papyload}
+        default:
+            return state
+    }
+}

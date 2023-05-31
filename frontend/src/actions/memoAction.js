@@ -12,3 +12,15 @@ export const createMemoA=(tytle,content)=>async(dispatch,getState)=>{
         dispatch({type:"CREATE_MEMO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
     }
 }
+
+export const listMemoA=()=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"LIST_MEMO_REQ"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.get(process.env.REACT_APP_BACKEND_URL+"/",config)
+        dispatch({type:"LIST_MEMO_SUC",payload:data})
+    }catch(e){
+        dispatch({type:"LIST_MEMO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
+    }
+}

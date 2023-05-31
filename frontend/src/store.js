@@ -2,14 +2,16 @@ import {createStore,combineReducers,applyMiddleware} from "redux"
 import thunk from "redux-thunk"
 import {composeWithDevTools} from "redux-devtools-extension"
 import { userLoginR, userRegisterR } from "./reducers/userReducer"
-import { createMemoR } from "./reducers/memoReducer"
-import { createTodoR } from "./reducers/todoReducer"
+import { createMemoR,listMemoR } from "./reducers/memoReducer"
+import { createTodoR, listTodoR } from "./reducers/todoReducer"
 
 const reducer=combineReducers({
     userLogin:userLoginR,
     userRegister:userRegisterR,
     createMemo:createMemoR,
     createTodo:createTodoR,
+    listMemoR:listMemoR,
+    listTodo:listTodoR,
 })
 
 const userUserInfoFromStorage=localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null

@@ -10,3 +10,16 @@ export const createMemoR=(state={},action)=>{
             return state
     }
 }
+
+export const listMemoR=(state=[],action)=>{
+    switch(action.type){
+        case "LIST_MEMO_REQ":
+            return {loading:true,data:[]}
+        case "LIST_MEMO_SUC":
+            return {loading:false,data:action.payload}
+        case "LIST_MEMO_FAIL":
+            return {loading:false,error:action.papyload}
+        default:
+            return state
+    }
+}
