@@ -8,14 +8,22 @@
 
 .sm_tytle{@apply text-xl font-bold }
 
-.btn{@apply md:block md:mx-auto sm:w-auto w-full md:w-5/12 rounded-md bg-orange-800 hover:bg-orange-700 text-white py-2 my-4 }
+.btn{@apply md:block md:mx-auto rounded-md bg-orange-800 hover:bg-orange-700 text-white p-2 my-4 }
+
+.btn-green{@apply  rounded-md  bg-green-700 text-lime-100 p-2 my-4}
+
+.btn-size-big{@apply sm:w-auto w-full md:w-5/12}
 
 .input{@apply border-2 rounded-lg p-1.5  border-orange-800 bg-lime-100 focus:outline-none w-full}
 
+.list{@apply list-disc ml-4}
+
+/* memo&todo */
 .loading{@apply text-orange-800}
 
 .error{@apply text-white bg-red-600 py-2 m-2 text-center}
 
-.list{@apply list-disc ml-4}
+.next_input{@apply border-2 rounded-lg p-1.5  border-orange-800 bg-lime-100 focus:outline-none w-full font-bold my-4}
+
 
 

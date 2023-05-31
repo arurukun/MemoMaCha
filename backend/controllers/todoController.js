@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler"
-import Todo from "../models/todoMode.js"
+import Todo from "../models/todoModel.js"
 
 export const createTodo=asyncHandler(async(req,res)=>{
     const {category,todoItems}=req.body

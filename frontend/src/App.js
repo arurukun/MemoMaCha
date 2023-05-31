@@ -4,6 +4,7 @@ import { HomeScreen } from "./screen/HomeScreen";
 import { UserLoginScreen } from "./screen/UserLoginScreen";
 import { UserRegisterScreen } from "./screen/UserRegisterScreen";
 import { MemoScreen } from "./screen/MemoScreen";
+import { TodoScreen } from "./screen/TodoScreen";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" component={UserLoginScreen}/>
         <Route path="/register" component={UserRegisterScreen}/>
         <Route path="/memo" component={MemoScreen}/>
+        <Route path="/todo" component={TodoScreen}/>
         <Route path="/" component={HomeScreen} exact/>
       </main>
     </BrowserRouter>

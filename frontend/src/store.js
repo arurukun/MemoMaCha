@@ -3,11 +3,13 @@ import thunk from "redux-thunk"
 import {composeWithDevTools} from "redux-devtools-extension"
 import { userLoginR, userRegisterR } from "./reducers/userReducer"
 import { createMemoR } from "./reducers/memoReducer"
+import { createTodoR } from "./reducers/todoReducer"
 
 const reducer=combineReducers({
     userLogin:userLoginR,
     userRegister:userRegisterR,
     createMemo:createMemoR,
+    createTodo:createTodoR,
 })
 
 const userUserInfoFromStorage=localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null

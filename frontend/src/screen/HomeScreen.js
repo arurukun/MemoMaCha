@@ -15,6 +15,10 @@ export const HomeScreen = ({history}) => {
     history.push("/memo")
   }
 
+  const todoStartHandler=()=>{
+    history.push("/todo")
+  }
+
   return (
     <div>
       <div className='container'>
@@ -35,14 +39,14 @@ export const HomeScreen = ({history}) => {
                 <li>Freely descrive : Can be customaized</li>
                 <li>Categorization : Searchable for tytle</li>
               </ul>
-              <button onClick={memoStartHandler} className='btn'>Start</button>
+              <button onClick={memoStartHandler} className='btn btn-size-big'>Start</button>
             </div>
             <div>
               <h1 className='sm_tytle'>--To Do List--</h1>
               <ul className='list'>
                 <li>Obviously : Easy to graps whether completed or not</li>
               </ul>
-              <button className='btn'>Start</button>
+              <button onClick={todoStartHandler} className='btn btn-size-big'>Start</button>
             </div>
           </div>
         </div>

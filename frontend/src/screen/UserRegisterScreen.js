@@ -53,7 +53,7 @@ export const UserRegisterScreen = ({location,history}) => {
                     <label className='mr-7' >Confirm Password</label>
                     <input onChange={(e)=>setConfirmPassword(e.target.value)} value={confirmPassword} type="password" placeholder='Enter your ConfirmPassword' className='input'></input>
                 </div>
-                <button onClick={submitHandler} className='btn'>Submit</button>
+                <button onClick={submitHandler} className='btn btn-size-big'>Submit</button>
                 <p>Are you a member?<Link to={redirect ? `login?redirect=${redirect}` : "/login"} className='underline'>Login here</Link></p>
             </form>
         </div>

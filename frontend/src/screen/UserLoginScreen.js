@@ -36,7 +36,7 @@ export const UserLoginScreen = ({location,history}) => {
                     <label className='mr-7' >Password</label>
                     <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" placeholder='Enter your Password' className='input'></input>
                 </div>
-                <button onClick={submitHandler} className='btn'>Sign In</button>
+                <button onClick={submitHandler} className='btn btn-size-big'>Sign In</button>
                 <p>Are you a first visiter?<Link to={redirect ? `register?redirect=${redirect}` : "/register"} className='underline'>Register here</Link></p>
             </form>
         </div>
