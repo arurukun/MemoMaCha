@@ -1,23 +1,25 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../actions/userAction'
 
 export const Header = () => {
   const {userInfo}=useSelector((s)=>s.userLogin)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     // if(userInfo)
   },[userInfo])
 
   const logoutHandler=()=>{
-    dispatchEvent(logout())
+    dispatch(logout())
   }
+
   return (
     <div className='bg-gradient-to-r from-green-600 to-green-800 py-3 border-b-2 border-orange-800 '>
       <div className='container flex flex-row justify-between md:items-center '>
         <h1 className='text-4xl font-bold text-lime-100'><Link to="/">MemoMaCha</Link></h1> 
-        <div className="md:w-3/12  sm:h-full sm:w-full ">
+        <div className="md:w-3/12  sm:h-full sm:w-full">
           {userInfo&&userInfo._id ? 
           <div className="md:flex justify-around md:items-center w-full  sm:flex sm:felx-col ">
             <Link to="/user/profile">
@@ -28,7 +30,7 @@ export const Header = () => {
             </Link>
             <button onClick={logoutHandler} className="text-xl  text-lime-100 sm:t-4">Log Out</button>
           </div>
-          : <p>Sign In</p>}
+          : <Link to="/login" className="text-xl  text-lime-100 text-center">Sign In</Link>}
         </div>  
       </div>
     </div>
