@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createMemoA } from '../actions/memoAction'
+import { createMemoA, listMemoA } from '../actions/memoAction'
 
 export const MemoScreen = ({history}) => {
     const [tytle,setTytle]=useState("")
@@ -18,6 +18,7 @@ export const MemoScreen = ({history}) => {
     const submitHandler=(e)=>{
         e.preventDefault()
         dispatch(createMemoA(tytle,content))
+        dispatch(listMemoA())
         history.push("/")
     }
   return (

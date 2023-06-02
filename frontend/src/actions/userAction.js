@@ -24,3 +24,8 @@ export const userRegisterA=(name,email,password)=>async(dispatch)=>{
         dispatch({type:"USER_REGISTER_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
     }
 }
+
+export const logout=()=>(dispatch)=>{
+    localStorage.removeItem("userInfo")
+    dispatch({type:"USER_LOGOUT"})
+}

@@ -10,7 +10,7 @@ const reducer=combineReducers({
     userRegister:userRegisterR,
     createMemo:createMemoR,
     createTodo:createTodoR,
-    listMemoR:listMemoR,
+    listMemo:listMemoR,
     listTodo:listTodoR,
 })
 

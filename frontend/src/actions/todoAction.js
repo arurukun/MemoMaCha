@@ -17,7 +17,7 @@ export const listTodoA=()=>async(dispatch,getState)=>{
         dispatch({type:"LIST_TODO_REQ"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
-        const {data}=await axios.post(process.env.REACT_APP_BACKEND_URL+"/",config)
+        const {data}=await axios.get(process.env.REACT_APP_BACKEND_URL+"/api/todo",config)
         dispatch({type:"LIST_TODO_SUC",payload:data})
     }catch(e){
         dispatch({type:"LIST_TODO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
