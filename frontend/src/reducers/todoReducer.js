@@ -23,3 +23,16 @@ export const listTodoR=(state=[],action)=>{
             return state
     }
 }
+
+export const editTodoR=(state={},action)=>{
+    switch(action.type){
+        case "EDIT_TODO_REQ":
+            return {loading:true}
+        case "EDIT_TODO_SUC":
+            return {loading:false,data:action.payload}
+        case "EDIT_TODO_FAIL":
+            return {loading:false,error:action.papyload}
+        default:
+            return state
+    }
+}

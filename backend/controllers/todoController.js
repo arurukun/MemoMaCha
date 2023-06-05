@@ -34,3 +34,23 @@ export const getListTodo=asyncHandler(async(req,res)=>{
         res.status(404).send("Todo is empty")
     }
 })
+
+export const getTodo=asyncHandler(async(req,res)=>{
+    const user=req.user
+    const todoId=req.params.id
+    if(user.todoList.includes(todoId) || user.todoList.includes(todoId)){
+        const todo=await Todo.findById(todoId)
+        res.send(todo)
+    }else{
+        res.status(401).send("Not authorized")
+    }
+})
+
+export const editTodo=asyncHandler(async(req,res)=>{
+    const todo=await Todo.findById(req.params.id)
+    if(todo){
+        res.json(todo)
+    }else{
+        res.status(404).send("Todo is not found")
+    }
+})

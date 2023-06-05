@@ -1,5 +1,7 @@
 import asyncHandler from "express-async-handler"
 import Memo from "../models/memoModel.js"
+import Todo from "../models/todoModel.js"
+import { Types } from "mongoose";
 
 export const createMemo=asyncHandler(async(req,res)=>{
     const {tytle,content}=req.body
@@ -22,5 +24,37 @@ export const getListMemo=asyncHandler(async(req,res)=>{
         res.json(memoList)
     }else{
         res.status(404).send("Mmeo is empty")
+    }
+})
+
+export const getMemo=asyncHandler(async(req,res)=>{
+    const user=req.user
+    const memoId = req.params.id
+    if(user.memoList.includes(memoId) || user.memoList.includes(memoId)){
+        const memo=await Memo.findById(memoId)
+        res.json(memo)
+    }else{
+        res.status(401).send("Not authorized")
+    }
+
+    // const memo=await Memo.findById(req.params.id)
+    // const user=req.user
+    // if(memo){
+    //     if(user.writeUser||user.readUser){
+    //         res.json(memo)
+    //     }else{
+    //         res.status(401).send("Not authorized")
+    //     }
+    // }else{
+    //     res.status(404).send("Memo is not found")
+    // }
+})
+
+export const editMemo=asyncHandler(async(req,res)=>{
+    const memo=await req.body
+    if(memo){
+        // const memo.tytle=req.body.tytle||
+    }else{
+        res.status(404).send("Memo is not found")
     }
 })
