@@ -5,6 +5,7 @@ import { UserLoginScreen } from "./screen/UserLoginScreen";
 import { UserRegisterScreen } from "./screen/UserRegisterScreen";
 import { MemoScreen } from "./screen/MemoScreen";
 import { TodoScreen } from "./screen/TodoScreen";
+import { EditMemoScreen } from "./screen/EditMemoScreen";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <main className="bg-gradient-to-tr from-teal-100 to-lime-300 min-h-screen min-w-screen">
         <Route path="/login" component={UserLoginScreen}/>
         <Route path="/register" component={UserRegisterScreen}/>
-        <Route path="/memo" component={MemoScreen}/>
+        <Route path="/memo/:id" component={EditMemoScreen} exact/>
+        <Route path="/memo" component={MemoScreen} exact/>
         <Route path="/todo" component={TodoScreen}/>
         <Route path="/" component={HomeScreen} exact/>
       </main>

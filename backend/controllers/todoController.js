@@ -47,9 +47,18 @@ export const getTodo=asyncHandler(async(req,res)=>{
 })
 
 export const editTodo=asyncHandler(async(req,res)=>{
+    const {category,todoItems}=req.body
     const todo=await Todo.findById(req.params.id)
+    const user=req.user
     if(todo){
-        res.json(todo)
+        if(user&&user.todoList.includes(todo._id)){
+            todo.category=category||todo.category
+            todo.todoItems=todoItems||todo.todoItems
+            const updatedTodo=await todo.save()
+            res.send(updatedTodo)
+        }else{
+            res.status(401).send("Not authorized")
+        }
     }else{
         res.status(404).send("Todo is not found")
     }

@@ -35,7 +35,7 @@ export const HomeScreen = ({history}) => {
           {userInfo ? (
         <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-8 border-2 border-orange-800 p-4 shadow-xl rounded-md mt-4 mr-4'>
         {listMemo&&listMemo.map((memo)=>{return(
-          <Link to="">
+          <Link to={`/memo/${memo._id}`}>
             <div className='border border-orange-800 text-sm p-2 rounded-md shadow-xl hover:border-2'>
               <div className='font-bold mx-2'>{memo.tytle.length>10 ? memo.tytle.substring(0,10)+"..." : memo.tytle}</div>
               <div>{memo.content.length>30 ? memo.content.substring(0,30)+"..." : memo.content}</div>
@@ -43,7 +43,7 @@ export const HomeScreen = ({history}) => {
           </Link>
         )})}
         {listTodo&&listTodo.map((todo,i)=>{return(
-          <Link to="">
+          <Link to={`/todo/edit/${todo._id}`}>
             <div className='border border-orange-800 text-sm p-2 rounded-md shadow-xl hover:border-2'>
               <div className='font-bold mx-2'>{todo.category.length>10 ? todo.category.substring(0,10)+"..." : todo.category}</div>
               {todo.todoItems.map((item,i)=>{return(

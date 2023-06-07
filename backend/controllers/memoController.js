@@ -51,9 +51,19 @@ export const getMemo=asyncHandler(async(req,res)=>{
 })
 
 export const editMemo=asyncHandler(async(req,res)=>{
-    const memo=await req.body
+    const {tytle,content}=req.body
+    const memo=await Memo.findById(req.params.id)
+    const user=req.user
     if(memo){
-        // const memo.tytle=req.body.tytle||
+        if(user&&user.memoList.includes(memo._id)){
+            memo.tytle=tytle||memo.tytle
+            memo.content=content||memo.content
+
+            const updatedMemo=await memo.save()
+            res.send(updatedMemo)
+        }else{
+            res.status(401).send("Not authorized")
+        }
     }else{
         res.status(404).send("Memo is not found")
     }

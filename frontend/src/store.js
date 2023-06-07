@@ -2,8 +2,8 @@ import {createStore,combineReducers,applyMiddleware} from "redux"
 import thunk from "redux-thunk"
 import {composeWithDevTools} from "redux-devtools-extension"
 import { userLoginR, userRegisterR } from "./reducers/userReducer"
-import { createMemoR,editMemoR,listMemoR } from "./reducers/memoReducer"
-import { createTodoR, editTodoR, listTodoR } from "./reducers/todoReducer"
+import { createMemoR,editMemoR,getMemoR,listMemoR } from "./reducers/memoReducer"
+import { createTodoR, editTodoR, getTodoR, listTodoR } from "./reducers/todoReducer"
 
 const reducer=combineReducers({
     userLogin:userLoginR,
@@ -12,6 +12,8 @@ const reducer=combineReducers({
     createTodo:createTodoR,
     listMemo:listMemoR,
     listTodo:listTodoR,
+    getMemo:getMemoR,
+    getTodo:getTodoR,
     editMemo:editMemoR,
     editTodo:editTodoR,
 })
