@@ -2,8 +2,8 @@ import {createStore,combineReducers,applyMiddleware} from "redux"
 import thunk from "redux-thunk"
 import {composeWithDevTools} from "redux-devtools-extension"
 import { userLoginR, userRegisterR } from "./reducers/userReducer"
-import { createMemoR,editMemoR,getMemoR,listMemoR } from "./reducers/memoReducer"
-import { createTodoR, editTodoR, getTodoR, listTodoR } from "./reducers/todoReducer"
+import { createMemoR,deleteMemoR,editMemoR,getMemoR,listMemoR } from "./reducers/memoReducer"
+import { createTodoR, deleteTodoR, editTodoR, getTodoR, listTodoR } from "./reducers/todoReducer"
 
 const reducer=combineReducers({
     userLogin:userLoginR,
@@ -16,6 +16,8 @@ const reducer=combineReducers({
     getTodo:getTodoR,
     editMemo:editMemoR,
     editTodo:editTodoR,
+    deleteMemo:deleteMemoR,
+    deleteTodo:deleteTodoR,
 })
 
 const userUserInfoFromStorage=localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null

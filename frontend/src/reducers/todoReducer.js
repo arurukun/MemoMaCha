@@ -49,3 +49,16 @@ export const editTodoR=(state={},action)=>{
             return state
     }
 }
+
+export const deleteTodoR=(state={},action)=>{
+    switch(action.type){
+        case "DELETE_TODO_REQ":
+            return {loading:true}
+        case "DELETE_TODO_SUC":
+            return {loading:false,todo:action.payload}
+        case "DELETE_TODO_FAIL":
+            return {loading:false,error:action.papyload}
+        default:
+            return state
+    }
+}

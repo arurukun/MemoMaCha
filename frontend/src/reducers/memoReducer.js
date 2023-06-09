@@ -49,3 +49,16 @@ export const editMemoR=(state={},action)=>{
             return state
     }
 }
+
+export const deleteMemoR=(state={},action)=>{
+    switch(action.type){
+        case "DELETE_MEMO_REQ":
+            return {loading:true}
+        case "DELETE_MEMO_SUC":
+            return {loading:false,memo:action.payload}
+        case "DELETE_MEMO_FAIL":
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}

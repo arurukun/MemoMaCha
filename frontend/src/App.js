@@ -6,6 +6,7 @@ import { UserRegisterScreen } from "./screen/UserRegisterScreen";
 import { MemoScreen } from "./screen/MemoScreen";
 import { TodoScreen } from "./screen/TodoScreen";
 import { EditMemoScreen } from "./screen/EditMemoScreen";
+import { EditTodoScreen } from "./screen/EditTodoScreen";
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
         <Route path="/login" component={UserLoginScreen}/>
         <Route path="/register" component={UserRegisterScreen}/>
         <Route path="/memo/:id" component={EditMemoScreen} exact/>
+        <Route path="/todo/:id" component={EditTodoScreen} exact/>
         <Route path="/memo" component={MemoScreen} exact/>
-        <Route path="/todo" component={TodoScreen}/>
+        <Route path="/todo" component={TodoScreen} exact/>
         <Route path="/" component={HomeScreen} exact/>
       </main>
     </BrowserRouter>

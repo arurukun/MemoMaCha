@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler"
 import Memo from "../models/memoModel.js"
 import Todo from "../models/todoModel.js"
 import { Types } from "mongoose";
+import User from "../models/userModel.js";
 
 export const createMemo=asyncHandler(async(req,res)=>{
     const {tytle,content}=req.body
@@ -66,5 +67,24 @@ export const editMemo=asyncHandler(async(req,res)=>{
         }
     }else{
         res.status(404).send("Memo is not found")
+    }
+})
+
+export const deleteMemo=asyncHandler(async(req,res)=>{
+    if(toString(req.user._id) === toString(req.memo.owner)){
+        for(let i=0; i<req.memo.writeUser.length; i++){
+            const user= await User.findById(req.memo.writeUser[i])
+            user.memoList=user.memoList.filter((element) => element !== req.memo.writeUser[i])
+            await user.save()
+        }
+        for(let i=0; i<req.memo.readUser.length; i++){
+            const user= await User.findById(req.memo.readUser[i])
+            user.memoList=user.memoList.filter((element) => element !== req.memo.readUser[i])
+            await user.save()
+        }
+        await Memo.findByIdAndRemove(req.memo._id)
+        res.json({message:"Memo was deleted"})
+    }else{
+        res.status(401).send("Not authorized.Only owner can delete it")
     }
 })

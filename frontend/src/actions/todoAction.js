@@ -47,3 +47,15 @@ export const editTodoA=(id,category,todoItems)=>async(dispatch,getState)=>{
         dispatch({type:"EDIT_TODO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
     }
 }
+
+export const deleteTodoA=(id)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"DELETE_TODO_REQ"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.delete(process.env.REACT_APP_BACKEND_URL+`/api/todo/edit/${id}`,config)
+        dispatch({type:"DELETE_TODO_SUC",payload:data})
+    }catch(e){
+        dispatch({type:"DELETE_TODO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
+    }
+}

@@ -16,7 +16,7 @@ export const HomeScreen = ({history}) => {
       dispatch(listMemoA())
       dispatch(listTodoA())
     }
-  },[userInfo, dispatch])
+  },[userInfo, dispatch,history])
 
   const memoStartHandler=()=>{
     history.push("/memo")
@@ -43,7 +43,7 @@ export const HomeScreen = ({history}) => {
           </Link>
         )})}
         {listTodo&&listTodo.map((todo,i)=>{return(
-          <Link to={`/todo/edit/${todo._id}`}>
+          <Link to={`/todo/${todo._id}`}>
             <div className='border border-orange-800 text-sm p-2 rounded-md shadow-xl hover:border-2'>
               <div className='font-bold mx-2'>{todo.category.length>10 ? todo.category.substring(0,10)+"..." : todo.category}</div>
               {todo.todoItems.map((item,i)=>{return(

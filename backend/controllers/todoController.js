@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler"
 import Todo from "../models/todoModel.js"
+import User from "../models/userModel.js"
 
 export const createTodo=asyncHandler(async(req,res)=>{
     const {category,todoItems}=req.body
@@ -25,9 +26,9 @@ export const createTodo=asyncHandler(async(req,res)=>{
 
 export const getListTodo=asyncHandler(async(req,res)=>{
     const userPopulate=await req.user.populate("todoList","_id category todoItems updateAt")
-    console.log(userPopulate)
+    // console.log(userPopulate)
     const todoList=userPopulate.todoList
-    console.log(todoList)
+    // console.log(todoList)
     if(todoList){
         res.json(todoList)
     }else{
@@ -61,5 +62,24 @@ export const editTodo=asyncHandler(async(req,res)=>{
         }
     }else{
         res.status(404).send("Todo is not found")
+    }
+})
+
+export const deleteTodo=asyncHandler(async(req,res)=>{
+    if(toString(req.todo.owner)===toString(req.user._id)){
+        for(let i=0; i<req.todo.writeUser.length; i++){
+            const user=await User.findById(req.todo.writeUser[i])
+            user.todoList=user.todoList.filter((e)=>e !==req.todo.writeUser[i])
+            await user.save()
+        }
+        for(let i=0; i<req.todo.readUser.length; i++){
+            const user=await User.findById(req.todo.readUser[i])
+            user.todoList=user.todoList.filter((e)=>e !==req.todo.readUser[i])
+            await user.save()
+        }
+        await Todo.findByIdAndRemove(req.todo._id)
+        res.json({massage:"Todo was deleted"})
+    }else{
+        res.status(404).send("Not authorized.Only owner can delete it")
     }
 })

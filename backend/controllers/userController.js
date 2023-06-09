@@ -7,7 +7,7 @@ export const authUser=asyncHandler(async(req,res)=>{
     const {email,password}=req.body
     const user=await User.findOne({email})
     if(user&&(await bcrypt.compare(password,user.password))){
-        console.log(jwt.sign({userId:user._id},process.env.JWT_SECRET,{expiresIn:"30d"}))
+        // console.log(jwt.sign({userId:user._id},process.env.JWT_SECRET,{expiresIn:"30d"}))
         res.json({_id:user._id,name:user.name,email:user.email,image:user.image,token:jwt.sign({userId:user._id},process.env.JWT_SECRET,{expiresIn:"30d"})})
     }else{
         res.status(401).send("Invalid email or password")

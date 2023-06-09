@@ -30,7 +30,10 @@ export const getMemoA=(id)=>async(dispatch,getState)=>{
         dispatch({type:"GET_MEMO_REQ"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        // console.log(process.env.REACT_APP_BACKEND_URL)
+        // console.log(process.env.REACT_APP_BACKEND_URL+`/api/memo/edit/${id}`)
         const {data}=await axios.get(process.env.REACT_APP_BACKEND_URL+`/api/memo/edit/${id}`,config)
+        // console.log(data)
         dispatch({type:"GET_MEMO_SUC",payload:data})
     }catch(e){
         dispatch({type:"GET_MEMO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
@@ -46,5 +49,17 @@ export const editMemoA=(id,tytle,content)=>async(dispatch,getState)=>{
         dispatch({type:"EDIT_MEMO_SUC",payload:data})
     }catch(e){
         dispatch({type:"EDIT_MEMO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
+    }
+}
+
+export const deleteMemoA=(id)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"DELETE_MEMO_REQ"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.delete(process.env.REACT_APP_BACKEND_URL+`/api/memo/edit/${id}`,config)
+        dispatch({type:"DELETE_MEMO_SUC",payload:data})
+    }catch(e){
+        dispatch({type:"DELETE_MEMO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
     }
 }
