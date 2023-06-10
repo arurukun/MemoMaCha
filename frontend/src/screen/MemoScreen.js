@@ -21,6 +21,16 @@ export const MemoScreen = ({history}) => {
         dispatch(listMemoA())
         history.push("/")
     }
+
+    // const searchBox=()=>{
+    //     const [userKeyword,setKeyword]=useState("")
+    //     const searchHandler=(e)=>{
+    //         e.preventDefault(
+    //         if(userKeyword.trim()){}
+    //         )
+    //     }
+    // }
+
   return (
     <div>
         <div className='container'>

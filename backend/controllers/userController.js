@@ -31,3 +31,13 @@ export const registerUser=asyncHandler(async(req,res)=>{
 export const getUserProfile=asyncHandler(async(req,res)=>{
     res.json(req.user)
 })
+
+export const searchUser=asyncHandler(async(req,res)=>{
+    const query= {$or:[{name:{$regex:req.query.userKeyword}},{email:{$regex:req.query.userKeyword}}]}
+    const user=await User.find(query).select("_id name email image")
+    if(user){
+        res.json(user)
+    }else{
+        res.status(404).send("User not found")
+    }
+})

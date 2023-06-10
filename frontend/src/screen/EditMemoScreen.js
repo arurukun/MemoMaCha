@@ -45,7 +45,7 @@ export const EditMemoScreen = ({match,history}) => {
             <form className='md:w-3/5 mx-auto'>
                 <input type="text" onChange={(e)=>setTytle(e.target.value)} value={tytle} disabled={disabled} placeholder='Enter the tytle' className='next_input '></input>
                 <textarea rows={7} onChange={(e)=>setContent(e.target.value)} value={content} disabled={disabled} placeholder='Enter the memo' className='input h-990'></textarea>
-                    {memo&&memo.writeUser.includes(userInfo._id) &&disabled ? 
+                    {memo&&memo.writeUser&&memo.writeUser.includes(userInfo._id) && disabled ? 
                         <div className='flex justify-center'> 
                             <button onClick={editBtnHandler} className='btn btn-size-big'>Edit</button> 
                         </div>

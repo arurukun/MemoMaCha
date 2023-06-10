@@ -26,9 +26,7 @@ export const createTodo=asyncHandler(async(req,res)=>{
 
 export const getListTodo=asyncHandler(async(req,res)=>{
     const userPopulate=await req.user.populate("todoList","_id category todoItems updateAt")
-    // console.log(userPopulate)
     const todoList=userPopulate.todoList
-    // console.log(todoList)
     if(todoList){
         res.json(todoList)
     }else{

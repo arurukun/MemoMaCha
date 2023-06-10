@@ -19,6 +19,7 @@ export const createMemo=asyncHandler(async(req,res)=>{
 })
 
 export const getListMemo=asyncHandler(async(req,res)=>{
+    // const keyword=req.query.keyword ? {name:{$regex:req.query.keyword,$option:"i"}} : {}
     const userPopulate=await req.user.populate('memoList', "_id tytle content updatedAt")
     const memoList = userPopulate.memoList
     if(memoList){
