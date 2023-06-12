@@ -29,3 +29,15 @@ export const logout=()=>(dispatch)=>{
     localStorage.removeItem("userInfo")
     dispatch({type:"USER_LOGOUT"})
 }
+
+export const getSearchUserA=(userKeyword)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"GET_SEARCH_USER_REQ"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.get(process.env.REACT_APP_BACKEND_URL+`/api/user/search/?userKeyword=${userKeyword}`,config)
+        dispatch({type:"GET_SEARCH_USER_SUC",payload:data})
+    }catch(e){
+        dispatch({type:"GET_SEARCH_USER_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
+    }
+}

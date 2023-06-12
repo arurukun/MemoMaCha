@@ -33,11 +33,27 @@ export const getUserProfile=asyncHandler(async(req,res)=>{
 })
 
 export const searchUser=asyncHandler(async(req,res)=>{
-    const query= {$or:[{name:{$regex:req.query.userKeyword}},{email:{$regex:req.query.userKeyword}}]}
-    const user=await User.find(query).select("_id name email image")
-    if(user){
-        res.json(user)
+    if(req.query.userKeyword==""){
+        res.json([])
     }else{
-        res.status(404).send("User not found")
+        const query= {$or:[{name:{$regex:req.query.userKeyword}},{email:{$regex:req.query.userKeyword}}]}
+        const user=await User.find(query).select("_id name email image")
+        if(user){
+            res.json(user)
+        }else{
+            res.status(404).send("User not found")
+        }
     }
 })
+
+
+//need to tell b user of yourself-ptotect- memo.owner == req.parmas._id,memo,user who you eant add
+// if readlist does exist needs to filter(!id)
+// if(memolist.includes()) if there is no and memo.memolist.push(_id)
+// 
+
+// user, memo, friend
+// protect --> have
+// findMemo --> to find the memo if it exists
+// checkOwnerMiddleware -> will check if the memo belongs to the owner
+// removePermissionMiddleware -> it will remove read and write permission your friend, also 

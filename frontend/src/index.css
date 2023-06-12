@@ -10,7 +10,7 @@
 
 .btn{@apply md:block md:mx-auto rounded-md bg-orange-800 hover:bg-orange-700 text-white p-2 my-4 }
 
-.btn-green{@apply  rounded-md  bg-green-700 text-lime-100 p-2 my-4}
+.btn-green{@apply  rounded-md  bg-green-700 text-lime-100 p-2 my-4 hover:bg-green-600}
 
 .btn-size-big{@apply sm:w-auto w-full md:w-5/12}
 
