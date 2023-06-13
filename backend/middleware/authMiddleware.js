@@ -43,3 +43,27 @@ export const findTodoById=asyncHandeler(async(req,res,next)=>{
         res.status(404).send("Todo is not found")
     }
 })
+
+//check ownerId of memo or todo and params id are same or not
+export const checkMemoOwner=asyncHandeler(async(req,res,next)=>{
+    req.memo=await Memo.findById(req.params.id)
+    if(req.memo&&toString(req.memo.owner)==toString(req.user._id)){
+        next()
+    }else{
+        res.status(401).json("You are not owner of this memo")
+    }
+})
+
+export const checkTodoOwner=asyncHandeler(async(req,res,next)=>{
+    req.todo=await Todo.findById(req.params.id)
+    if(req.todo&&toString(req.todo.owner)==toString(req.user._id)){
+        next()
+    }else{
+        res.status(401).json("You are not owner of this todo")
+    }
+})
+
+// const checkMemoId=req.params.id 
+    //memo or todo which u want give the permission
+// const givenUser=req.body 
+    //user who get the permission

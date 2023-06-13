@@ -81,3 +81,46 @@ export const deleteTodo=asyncHandler(async(req,res)=>{
         res.status(404).send("Not authorized.Only owner can delete it")
     }
 })
+
+export const addWriteUser=asyncHandler(async(req,res)=>{
+    const {selectedUser}=req.body
+    const todo=req.todo
+    const selectedUserValid=await User.findById(selectedUser)
+    if(todo&&selectedUserValid){
+        todo.readUser=todo.readUser.filter((id)=>{id!==selectedUserValid._id})
+        todo.writeUser=todo.writeUser.filter((id)=>{id!==selectedUserValid._id})
+        todo.writeUser.push(selectedUserValid._id)
+        await todo.save()
+        if(!selectedUserValid.todoList.includes(todo._id)){
+            selectedUserValid.todoList.push(todo._id)
+            await selectedUserValid.save()
+            res.send("Success")
+        }else{
+            res.json("Alread give the same permission")
+        }
+    }else{
+        res.status(404).json("Todo or selected user is not found")
+    }
+})
+
+export const addReadUser=asyncHandler(async(req,res)=>{
+    const {selectedUser}=req.body
+    const todo=req.todo
+    const selectedUserValid=await User.findById(selectedUser)
+    // console.log(selectedUserValid)
+    if(todo&&selectedUserValid){
+        todo.writeUser=todo.writeUser.filter((id)=>{id!==selectedUserValid._id})
+        todo.readUser=todo.readUser.filter((id)=>{id!==selectedUserValid._id})
+        todo.readUser.push(selectedUserValid._id)
+        await todo.save()
+        if(!selectedUserValid.todoList.includes(todo._id)){
+            selectedUserValid.todoList.push(todo._id)
+            await selectedUserValid.save()
+            res.send("Success")
+        }else{
+            res.json("Alread give the same permission")
+        }
+    }else{
+        res.status(404).json("Memo or selected user is not found")
+    }
+})

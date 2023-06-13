@@ -89,3 +89,47 @@ export const deleteMemo=asyncHandler(async(req,res)=>{
         res.status(401).send("Not authorized.Only owner can delete it")
     }
 })
+
+export const addWriteUser=asyncHandler(async(req,res)=>{
+    const {selectedUser}=req.body
+    // const memo=await Memo.findById(req.params._id)
+    const memo=req.memo
+    const selectedUserValid=await User.findById(selectedUser)
+    if(memo&&selectedUserValid){
+        memo.readUser=memo.readUser.filter((id)=>{id!==selectedUserValid._id})
+        memo.writeUser=memo.writeUser.filter((id)=>{id!==selectedUserValid._id})
+        memo.writeUser.push(selectedUserValid._id)
+        await memo.save()
+        if(!selectedUserValid.memoList.includes(memo._id)){
+            selectedUserValid.memoList.push(memo._id)
+            await selectedUserValid.save()
+            res.send("Success")
+        }else{
+            res.json("Alread give the same permission")
+        }
+    }else{
+        res.status(404).json("Memo or selected user is not found")
+    }
+})
+
+export const addReadUser=asyncHandler(async(req,res)=>{
+    const {selectedUser}=req.body
+    const memo=req.memo
+    const selectedUserValid=await User.findById(selectedUser)
+    console.log(selectedUserValid)
+    if(memo&&selectedUserValid){
+        memo.writeUser=memo.writeUser.filter((id)=>{id!==selectedUserValid._id})
+        memo.readUser=memo.readUser.filter((id)=>{id!==selectedUserValid._id})
+        memo.readUser.push(selectedUserValid._id)
+        await memo.save()
+        if(!selectedUserValid.memoList.includes(memo._id)){
+            selectedUserValid.memoList.push(memo._id)
+            await selectedUserValid.save()
+            res.send("Success")
+        }else{
+            res.json("Alread give the same permission")
+        }
+    }else{
+        res.status(404).json("Memo or selected user is not found")
+    }
+})

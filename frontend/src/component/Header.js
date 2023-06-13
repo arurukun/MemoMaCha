@@ -24,7 +24,7 @@ export const Header = () => {
           <div className="md:flex justify-around md:items-center w-full  sm:flex sm:felx-col ">
             <Link to="/user/profile">
               <div className="flex ">
-                <img src={userInfo.image} className="h-[40px] w-[40px] rounded-full mr-2"></img>
+                <img src={userInfo.image} className="photo-img"></img>
                 <p className='text-2xl font-bold text-lime-100'>{userInfo.name}</p> 
               </div>
             </Link>

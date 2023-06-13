@@ -1,7 +1,7 @@
-const [selectedUser, setSelectedUser]=useState(null)
-const {loading, userList} = useSelector(s=>s.getUserkdhsdf)
+<!-- const [selectedUser, setSelectedUser]=useState(null)
+const {loading, userList} = useSelector((s)=>s.getSearchUser)
 
-onChangeHandler()=>{
+const onChangeHandler()=>{
     dispatch(getUser(userKeyword))
 }
 
@@ -15,7 +15,7 @@ onChangeHandler()=>{
       
     </div>
   
-    <!--
+    
       Dropdown menu, show/hide based on menu state.
   
       Entering: "transition ease-out duration-100"
@@ -24,7 +24,7 @@ onChangeHandler()=>{
       Leaving: "transition ease-in duration-75"
         From: "transform opacity-100 scale-100"
         To: "transform opacity-0 scale-95"
-    -->
+   
     <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
       <div class="py-1" role="none">
         {userList && userList.map((item)=>{
@@ -39,4 +39,4 @@ onChangeHandler()=>{
       </div>
     </div>
   </div>
-  
+   -->

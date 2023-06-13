@@ -47,7 +47,7 @@ export const searchUser=asyncHandler(async(req,res)=>{
 })
 
 
-//need to tell b user of yourself-ptotect- memo.owner == req.parmas._id,memo,user who you eant add
+//need to tell b user of yourself-ptotect- memo.owner == req.parmas.id,memo,user who you eant add
 // if readlist does exist needs to filter(!id)
 // if(memolist.includes()) if there is no and memo.memolist.push(_id)
 // 

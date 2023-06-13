@@ -18,6 +18,9 @@
 
 .list{@apply list-disc ml-4}
 
+/* header */
+.photo-img{@apply h-[40px] w-[40px] rounded-full mr-2}
+
 /* memo&todo */
 .loading{@apply text-orange-800}
 
