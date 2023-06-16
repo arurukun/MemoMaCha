@@ -62,3 +62,29 @@ export const deleteMemoR=(state={},action)=>{
             return state
     }
 }
+
+export const addWriteUserMemoR=(state={},action)=>{
+    switch(action.type){
+        case "ADD_WRITE_USER_MEMO_REQ":
+            return {loading:true}
+        case "ADD_WRITE_USER_MEMO_SUC":
+            return {loading:false,memo:action.payload}
+        case "ADD_WRITE_USER_MEMO_FAIL":
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}
+
+export const addReadUserMemoR=(state={},action)=>{
+    switch(action.type){
+        case "ADD_READ_USER_MEMO_REQ":
+            return {loading:true}
+        case "ADD_READ_USER_MEMO_SUC":
+            return {loading:false,memo:action.payload}
+        case "ADD_READ_USER_MEMO_FAIL":
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}

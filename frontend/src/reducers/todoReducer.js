@@ -62,3 +62,29 @@ export const deleteTodoR=(state={},action)=>{
             return state
     }
 }
+
+export const addWriteUserTodoR=(state={},action)=>{
+    switch(action.type){
+        case "ADD_WRITE_USER_TODO_REQ":
+            return {loading:true}
+        case "ADD_WRITE_USER_TODO_SUC":
+            return {loading:false,todo:action.payload}
+        case "ADD_WRITE_USER_TODO_FAIL":
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}
+
+export const addReadUserTodoR=(state={},action)=>{
+    switch(action.type){
+        case "ADD_READ_USER_TODO_REQ":
+            return {loading:true}
+        case "ADD_READ_USER_TODO_SUC":
+            return {loading:false,todo:action.payload}
+        case "ADD_READ_USER_TODO_FAIL":
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}

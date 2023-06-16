@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteTodoA, editTodoA, getTodoA } from '../actions/todoAction'
+import { addWriteUserTodoA,addReadUserTodoA,deleteTodoA, editTodoA, getTodoA } from '../actions/todoAction'
+import { getSearchUserA } from '../actions/userAction'
 
 export const EditTodoScreen = ({history,match}) => {
-    const todoId=match.params.id
     const [category, setCategory] = useState("")
     const [todoItems, setTodoItems] = useState([])
     const [disabled,setDisabled]=useState(true)
+    const [userKeyword,setUserKeyword]=useState("")
+    const [selectedUser,setSelectedUser]=useState(null)
 
-    const {loading,todo,error}=useSelector((s)=>s.getTodo)
     const {userInfo}=useSelector((s)=>s.userLogin)
+    const {loading,todo,error}=useSelector((s)=>s.getTodo)
+    const {loading:loadingSearchUser, searchUserList,error:errorSearchUser} = useSelector((s)=>s.getSearchUser)
     const dispatch=useDispatch()
+    const todoId=match.params.id
 
     useEffect(()=>{
         if(userInfo){
@@ -36,6 +40,22 @@ export const EditTodoScreen = ({history,match}) => {
     const deleteHandler=()=>{
         dispatch(deleteTodoA(match.params.id))
         history.push("/")
+    }
+
+    useEffect(()=>{
+        dispatch(getSearchUserA(userKeyword))
+    },[dispatch, userKeyword])
+
+    const writePermissionHandler=(e)=>{
+        e.preventDefault()
+        dispatch(addWriteUserTodoA(match.params.id,selectedUser))
+        setSelectedUser(null)
+    }
+
+    const readPermissionHandler=(e)=>{
+        e.preventDefault()
+        dispatch(addReadUserTodoA(match.params.id,selectedUser))
+        setSelectedUser(null)
     }
 
   return (
@@ -80,23 +100,65 @@ export const EditTodoScreen = ({history,match}) => {
                                 const updatedItems = [...todoItems];
                                 updatedItems.splice(i, 1);
                                 setTodoItems(updatedItems);
-                            }}  disabled={disabled} ><i className='fas fa-trash ml-2 fa-2x'></i></button>
+                            }}  disabled={disabled} ><i className='fas fa-trash ml-2 fa-2x'></i>
+                            </button>
                         </div>    
                         )
                     })}
 
-                    {todo && todo.writeUser.includes(userInfo._id) && disabled ? 
-                        <div className='flex justify-center'> 
-                            <button onClick={editBtnHandler} className='btn btn-size-big'>Edit</button> 
-                        </div>
-                        :
-                        <div className='grid grid-cols-4 gap-6'> 
-                            <button onClick={deleteHandler} className="col-span-2 btn btn-size-big">Delete</button>
+                {todo&&todo.writeUser&&todo.writeUser.includes(userInfo._id) && disabled &&
+                    <div className='flex justify-center'> 
+                        <button onClick={editBtnHandler} className='btn btn-size-big'>Edit</button> 
+                    </div>
+                }
+
+                <div className='grid grid-cols-4 gap-6'> 
+                    {!disabled &&
                         <button onClick={saveHandler} className="col-span-2 btn btn-size-big">Save</button>
-                        </div>
+                    }                    
+                    {!disabled && todo && userInfo && todo.owner == userInfo._id &&
+                            <button onClick={deleteHandler} className="col-span-2 btn btn-size-big">Delete</button>
                     }
+                </div>
                 
             </form>
+
+            {todo && userInfo && todo.owner == userInfo._id && <div className="md:flex md:flex-row md:justify-around md:items-center">
+                <div className='md:w-6/12 '>
+                    <p className=''>Give your friends the permissions</p>
+                    {selectedUser ? 
+                        <div className='flex'>
+                            <img src={selectedUser.image} className='col-span-1 photo-img mb-2' ></img>
+                            <button className='col-span-2 text-green-600 font-extrabold'>{selectedUser.name}</button>
+                        </div>
+                    : 
+                        <input type ="text" onChange={(e)=>{setUserKeyword(e.target.value)}} value={userKeyword} placeholder="Enter your frinend's user name or email" className='input' />
+                    }
+                </div>
+            </div>}
+
+            {selectedUser &&
+            <div className='flex flex-row justify-between items-center md:w-3/5 mx-auto'>
+                    <div className='w-3/5 md:flex mx-auto'>
+                        <button onClick={writePermissionHandler} className='col-span-1 btn btn-green'>Add the edit permission</button>
+                        <button onClick={readPermissionHandler} className='col-span-1 btn btn-green'>Add the read only </button>
+                    </div>
+            </div> 
+                } 
+                
+        
+            {searchUserList && searchUserList.length >0 && 
+            <div className='border-2 border-green-600 shadow-2xl md:w-1/3 h-max mx-auto p-3 rounded-md bg-lime-100'>  
+                {searchUserList && searchUserList.map((item)=>{
+                    return (
+                    <div className='' key={item._id}>                      
+                        <button onClick={()=>{setSelectedUser(item);setUserKeyword("");}} className="flex items-center" ><img src={item.image} className='photo-img mb-2' />{item.name}</button>
+                    </div>
+                    )
+                })}
+            </div>
+            }
+
         </div>
     </div>
   )

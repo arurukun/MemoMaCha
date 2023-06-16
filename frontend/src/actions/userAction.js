@@ -32,6 +32,7 @@ export const logout=()=>(dispatch)=>{
 
 export const getSearchUserA=(userKeyword)=>async(dispatch,getState)=>{
     try{
+        // console.log(userKeyword)
         dispatch({type:"GET_SEARCH_USER_REQ"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}

@@ -105,9 +105,9 @@ export const addWriteUser=asyncHandler(async(req,res)=>{
 
 export const addReadUser=asyncHandler(async(req,res)=>{
     const {selectedUser}=req.body
-    const todo=req.todo
+        console.log(selectedUser)
+        const todo=req.todo
     const selectedUserValid=await User.findById(selectedUser)
-    // console.log(selectedUserValid)
     if(todo&&selectedUserValid){
         todo.writeUser=todo.writeUser.filter((id)=>{id!==selectedUserValid._id})
         todo.readUser=todo.readUser.filter((id)=>{id!==selectedUserValid._id})

@@ -115,8 +115,9 @@ export const addWriteUser=asyncHandler(async(req,res)=>{
 export const addReadUser=asyncHandler(async(req,res)=>{
     const {selectedUser}=req.body
     const memo=req.memo
+    console.log(selectedUser)
     const selectedUserValid=await User.findById(selectedUser)
-    console.log(selectedUserValid)
+    // console.log(selectedUserValid)
     if(memo&&selectedUserValid){
         memo.writeUser=memo.writeUser.filter((id)=>{id!==selectedUserValid._id})
         memo.readUser=memo.readUser.filter((id)=>{id!==selectedUserValid._id})

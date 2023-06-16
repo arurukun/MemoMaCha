@@ -29,10 +29,23 @@ export const userRegisterR=(state={},action)=>{
 export const getSearchUserR=(state=[],action)=>{
     switch(action.type){
         case "GET_SEARCH_USER_REQ":
-            return {loading:true}
+            return {loading:true, searchUserList:[]}
         case "GET_SEARCH_USER_SUC":
             return {loading:false,searchUserList:action.payload}
         case "GET_SEARCH_USER_FAIL":
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}
+
+export const getUserProfileR=(state={},action)=>{
+    switch(action.type){
+        case "GET_USER_PROFILE_REQ":
+            return {loading:true}
+        case "GET_USER_PROFILE_SUC":
+            return {loading:false,user:action.payload}
+        case "GET_USER_PROFILE_FAIL":
             return {loading:false,error:action.payload}
         default:
             return state

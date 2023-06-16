@@ -59,3 +59,31 @@ export const deleteTodoA=(id)=>async(dispatch,getState)=>{
         dispatch({type:"DELETE_TODO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
     }
 }
+
+export const addWriteUserTodoA=(id,selectedUser)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"ADD_WRITE_USER_TODO_REQ"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        console.log("data")
+        const {data}=await axios.post(process.env.REACT_APP_BACKEND_URL+`/api/todo/selectWriteUser/${id}`,{selectedUser},config)
+        console.log(data)
+        dispatch({type:"ADD_WRITE_USER_TODO_SUC",payload:data})
+    }catch(e){
+        dispatch({type:"ADD_WRITE_USER_TODO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
+    }
+}
+
+export const addReadUserTodoA=(id,selectedUser)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"ADD_READ_USER_TODO_REQ"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        console.log(id)
+        console.log(process.env.REACT_APP_BACKEND_URL+`/api/todo/selectReadUser/${id}`)
+        const {data}=await axios.post(process.env.REACT_APP_BACKEND_URL+`/api/todo/selectReadUser/${id}`,{selectedUser},config)
+        dispatch({type:"ADD_READ_USER_TODO_SUC",payload:data})
+    }catch(e){
+        dispatch({type:"ADD_READ_USER_TODO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
+    }
+}

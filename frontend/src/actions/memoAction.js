@@ -63,3 +63,27 @@ export const deleteMemoA=(id)=>async(dispatch,getState)=>{
         dispatch({type:"DELETE_MEMO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
     }
 }
+
+export const addWriteUserMemoA=(id,selectedUser)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"ADD_WRITE_USER_MEMO_REQ"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.post(process.env.REACT_APP_BACKEND_URL+`/api/memo/selectWriteUser/${id}`,{selectedUser},config)
+        dispatch({type:"ADD_WRITE_USER_MEMO_SUC",payload:data})
+    }catch(e){
+        dispatch({type:"ADD_WRITE_USER_MEMO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
+    }
+}
+
+export const addReadUserMemoA=(id,selectedUser)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"ADD_READ_USER_MEMO_REQ"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.post(process.env.REACT_APP_BACKEND_URL+`/api/memo/selectReadUser/${id}`,{selectedUser},config)
+        dispatch({type:"ADD_READ_USER_MEMO_SUC",payload:data})
+    }catch(e){
+        dispatch({type:"ADD_READ_USER_MEMO_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
+    }
+}

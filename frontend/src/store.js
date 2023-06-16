@@ -1,13 +1,14 @@
 import {createStore,combineReducers,applyMiddleware} from "redux"
 import thunk from "redux-thunk"
 import {composeWithDevTools} from "redux-devtools-extension"
-import { getSearchUserR, userLoginR, userRegisterR } from "./reducers/userReducer"
-import { createMemoR,deleteMemoR,editMemoR,getMemoR,listMemoR } from "./reducers/memoReducer"
-import { createTodoR, deleteTodoR, editTodoR, getTodoR, listTodoR } from "./reducers/todoReducer"
+import { getSearchUserR, getUserProfileR, userLoginR, userRegisterR } from "./reducers/userReducer"
+import { addReadUserMemoR, addWriteUserMemoR, createMemoR,deleteMemoR,editMemoR,getMemoR,listMemoR } from "./reducers/memoReducer"
+import { addReadUserTodoR, addWriteUserTodoR, createTodoR, deleteTodoR, editTodoR, getTodoR, listTodoR } from "./reducers/todoReducer"
 
 const reducer=combineReducers({
     userLogin:userLoginR,
     userRegister:userRegisterR,
+    userProfile:getUserProfileR,
     createMemo:createMemoR,
     createTodo:createTodoR,
     listMemo:listMemoR,
@@ -19,6 +20,10 @@ const reducer=combineReducers({
     deleteMemo:deleteMemoR,
     deleteTodo:deleteTodoR,
     getSearchUser:getSearchUserR,
+    addWriteUserMemo:addWriteUserMemoR,
+    addReadUserMemo:addReadUserMemoR,
+    addWriteUserTodo:addWriteUserTodoR,
+    addReadUserTodo:addReadUserTodoR,
 })
 
 const userUserInfoFromStorage=localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null

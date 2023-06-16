@@ -12,7 +12,7 @@ function App() {
   return (
 
     <BrowserRouter>
-      <Header/>
+      <Route render={({history})=> <Header history={history}/>} />
       <main className="bg-gradient-to-tr from-teal-100 to-lime-300 min-h-screen min-w-screen">
         <Route path="/login" component={UserLoginScreen}/>
         <Route path="/register" component={UserRegisterScreen}/>
