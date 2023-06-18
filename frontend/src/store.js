@@ -1,7 +1,7 @@
 import {createStore,combineReducers,applyMiddleware} from "redux"
 import thunk from "redux-thunk"
 import {composeWithDevTools} from "redux-devtools-extension"
-import { getSearchUserR, getUserProfileR, userLoginR, userRegisterR } from "./reducers/userReducer"
+import { updateUserProfileR,getSearchUserR, getUserProfileR, userLoginR, userRegisterR } from "./reducers/userReducer"
 import { addReadUserMemoR, addWriteUserMemoR, createMemoR,deleteMemoR,editMemoR,getMemoR,listMemoR } from "./reducers/memoReducer"
 import { addReadUserTodoR, addWriteUserTodoR, createTodoR, deleteTodoR, editTodoR, getTodoR, listTodoR } from "./reducers/todoReducer"
 
@@ -9,6 +9,7 @@ const reducer=combineReducers({
     userLogin:userLoginR,
     userRegister:userRegisterR,
     userProfile:getUserProfileR,
+    updaetUserProfule:updateUserProfileR,
     createMemo:createMemoR,
     createTodo:createTodoR,
     listMemo:listMemoR,

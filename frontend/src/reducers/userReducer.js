@@ -51,3 +51,18 @@ export const getUserProfileR=(state={},action)=>{
             return state
     }
 }
+
+export const updateUserProfileR=(state={user:{}},action)=>{
+    switch(action.type){
+        case "UPDATE_USER_PROFILE_REQ":
+            return {loading:true}
+        case "UPDATE_USER_PROFILE_SUC":
+            return {loading:false,user:action.payload,success:true}
+        case "UPDATE_USER_PROFILE_FAIL":
+            return {loading:false,error:action.payload}
+        case "UPDATE_RESET":
+            return {user:{}}
+        default:
+            return state
+    }
+}

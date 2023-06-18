@@ -46,6 +46,27 @@ export const searchUser=asyncHandler(async(req,res)=>{
     }
 })
 
+export const updataUserProfile=asyncHandler(async(req,res)=>{
+    const user=await User.findById(req.user._id)
+    if(user){
+        user.name=req.body.name || user.name
+        user.email=req.body.email || user.email
+        if(req.body.password){
+            user.password=req.body.password || user.password
+        }
+        const updatedUser=await user.save()
+        res.json({
+            _id:updatedUser._id,
+            name:updatedUser.name,
+            email:updatedUser.email,
+            password:updatedUser.password,
+            token:jwt.sign({userId:updatedUser._id},prosecc.env.JWT_SECRET,{expiresIn:"30d"})
+        })
+    }else{
+        res.status(404).send("User not found")
+    }
+})
+
 
 //need to tell b user of yourself-ptotect- memo.owner == req.parmas.id,memo,user who you eant add
 // if readlist does exist needs to filter(!id)
