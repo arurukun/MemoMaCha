@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://arurukun.github.io/Memo_clear_website/" rel="noopener">
- <img src="./frontend/public/Screenshot.png" alt="Project logo"></a>
+ <img src="./frontend/public/screen_shot.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center"> <a href="https://arurukun.github.io/Memo_clear_website/"> MeoMaCha </a> </h3>
