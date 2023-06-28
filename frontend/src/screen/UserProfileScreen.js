@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getUserProfileA, updateUserProfileA } from '../actions/userAction'
+import axios from 'axios'
 
 export const UserProfileScreen = ({location,history}) => {
     const [name,setName]=useState("")
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const [confirmPassword,setConfirmPassword]=useState("")
+    const [image,setImage]=useState("")
     const [message,setMessage]=useState("")
+    const [uploading,setUploading]=useState(false)
     const {loading,user,error}=useSelector((s)=>s.userProfile)
     const {success}=useSelector((s)=>s.userProfile)
     const {userInfo}=useSelector((s)=>s.userLogin)
@@ -26,6 +29,7 @@ export const UserProfileScreen = ({location,history}) => {
                 console.log(userInfo)
                 setName(user.name)
                 setEmail(user.email)
+                setImage(user.image)
             }
         }
     },[dispatch,userInfo,user,history])
@@ -35,8 +39,24 @@ export const UserProfileScreen = ({location,history}) => {
         if(password!==confirmPassword){
             setMessage("Passwords doesn't much")
         }else{
-            dispatch(updateUserProfileA({id:user._id,name,email,password}))
+            dispatch(updateUserProfileA(name,email,password,image))
             history.push("/")
+        }
+    }
+
+    const uploadingHandler=async(e)=>{
+        const file=e.target.files[0]
+        const formDate=new FormData()
+        formDate.append("image",file)
+        setUploading(true)
+        try{
+            const config={headers:{"Content-Type":"multipart/form-data"}}
+            const {data}=await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/uploadApi`,formDate,config)
+            console.log(data)
+            setImage(data)
+            setUploading(false)
+        }catch(e){
+            setUploading(false)
         }
     }
   return (
@@ -62,6 +82,12 @@ export const UserProfileScreen = ({location,history}) => {
                 <div className='mt-3'>
                     <label className='mr-7' >Confirm Password</label>
                     <input onChange={(e)=>setConfirmPassword(e.target.value)} value={confirmPassword} type="password" placeholder="confirm the password" className='input'></input>
+                </div>
+                <div className='mt-3'>
+                <form action="/upload" method="/POST" encrtype="multipart/form-data" onChange={uploadingHandler}>
+                    <label for="image" className='mr-7' >Upload Image</label>
+                    <input type="file" name="image" id="image" className='input'></input>
+                </form>
                 </div>
                 <button onClick={submitHandler} className='btn btn-size-big'>Update</button>
             </form>

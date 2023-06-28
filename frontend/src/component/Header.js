@@ -26,7 +26,7 @@ export const Header = ({history}) => {
           <div className="md:flex justify-around md:items-center w-full  sm:flex sm:felx-col ">
             <Link to="/user/profile">
               <div className="flex ">
-                <img src={userInfo.image} className="photo-img"></img>
+                <img src={process.env.REACT_APP_BACKEND_URL+"/static"+userInfo.image} className="photo-img"></img>
                 <p className='text-2xl font-bold text-lime-100'>{userInfo.name}</p> 
               </div>
             </Link>

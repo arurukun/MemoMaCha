@@ -55,14 +55,16 @@ export const getUserProfileA=()=>async(dispatch,getState)=>{
     }
 }
 
-export const updateUserProfileA=(_id,name,email,password)=>async(dispatch,getState)=>{
+export const updateUserProfileA=(name,email,password,image)=>async(dispatch,getState)=>{
     try{
         dispatch({type:"UPDATE_USER_PROFILE_REQ"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
-        const {data}=await axios.put(process.env.REACT_APP_BACKEND_URL+`/api/user/profile`,{_id,name,email,password},config)
+        console.log(name)
+        const {data}=await axios.put(process.env.REACT_APP_BACKEND_URL+`/api/user/profile`,{name,email,password,image},config)
         dispatch({type:"UPDATE_USER_PROFILE_SUC",payload:data})
-        dispatch({type:"UPDATE_RESET",payload:data})
+        dispatch({type:"USER_LOGIN_SUC",payload:data})
+        localStorage.setItem("userInfo",JSON.stringify(data))
     }catch(e){
         dispatch({type:"UPDATE_USER_PROFILE_FAIL",payload:e.response&&e.response.message ? e.response.message : e.message})
     }

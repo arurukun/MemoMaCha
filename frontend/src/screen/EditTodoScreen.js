@@ -65,7 +65,8 @@ export const EditTodoScreen = ({history,match}) => {
             {error && <div className='error'>{error}</div>}
             <form className='md:w-3/5 mx-auto'>
 
-                {todo && todo.writeUser.includes(userInfo._id) && disabled==false && 
+                {todo&&todo.writeUser&&(todo.writeUser.includes(userInfo._id) || todo.owner ==userInfo._id )
+                && disabled &&
                 <div className='flex flex-col'>
                     <button onClick={(e)=>{
                         e.preventDefault();
@@ -128,7 +129,7 @@ export const EditTodoScreen = ({history,match}) => {
                     <p className=''>Give your friends the permissions</p>
                     {selectedUser ? 
                         <div className='flex'>
-                            <img src={selectedUser.image} className='col-span-1 photo-img mb-2' ></img>
+                            <img src={process.env.REACT_APP_BACKEND_URL+"/static"+selectedUser.image} className='col-span-1 photo-img mb-2' ></img>
                             <button className='col-span-2 text-green-600 font-extrabold'>{selectedUser.name}</button>
                         </div>
                     : 
@@ -152,7 +153,7 @@ export const EditTodoScreen = ({history,match}) => {
                 {searchUserList && searchUserList.map((item)=>{
                     return (
                     <div className='' key={item._id}>                      
-                        <button onClick={()=>{setSelectedUser(item);setUserKeyword("");}} className="flex items-center" ><img src={item.image} className='photo-img mb-2' />{item.name}</button>
+                        <button onClick={()=>{setSelectedUser(item);setUserKeyword("");}} className="flex items-center" ><img src={process.env.REACT_APP_BACKEND_URL+"/static"+item.image} className='photo-img mb-2' />{item.name}</button>
                     </div>
                     )
                 })}

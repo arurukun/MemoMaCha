@@ -51,16 +51,18 @@ export const updataUserProfile=asyncHandler(async(req,res)=>{
     if(user){
         user.name=req.body.name || user.name
         user.email=req.body.email || user.email
+        user.image=req.body.image || user.image
         if(req.body.password){
             user.password=req.body.password || user.password
         }
+        console.log(req.body)
         const updatedUser=await user.save()
         res.json({
             _id:updatedUser._id,
             name:updatedUser.name,
             email:updatedUser.email,
-            password:updatedUser.password,
-            token:jwt.sign({userId:updatedUser._id},prosecc.env.JWT_SECRET,{expiresIn:"30d"})
+            image:user.image,
+            token:jwt.sign({userId:updatedUser._id},process.env.JWT_SECRET,{expiresIn:"30d"})
         })
     }else{
         res.status(404).send("User not found")
