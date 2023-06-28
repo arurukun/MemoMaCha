@@ -1,11 +1,11 @@
 # MemoMaCha
 
 <p align="center">
-  <a href="https://arurukun.github.io/Memo_clear_website/" rel="noopener">
+  <a href="http://yukimemo.s3-website-ap-northeast-1.amazonaws.com/" rel="noopener">
  <img src="./frontend/public/screen_shot.png" alt="Project logo"></a>
 </p>
 
-<h3 align="center"> <a href="https://arurukun.github.io/Memo_clear_website/"> MeoMaCha </a> </h3>
+<h3 align="center"> <a href="http://yukimemo.s3-website-ap-northeast-1.amazonaws.com/"> MeoMaCha </a> </h3>
 
 <div align="center">
 

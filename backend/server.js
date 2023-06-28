@@ -10,7 +10,7 @@ import uploadRouter from "./routes/uploadRoute.js"
 import path from "path"
 
 const app=express()
-app.use(cors())
+app.use(cors("*"))
 dotenv.config()
 app.use(express.json())
 connected()
